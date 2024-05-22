@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import helmet from "helmet";
 import cors from "cors";
+import { LoggerReturn, LoggerTypes } from "@repo/types/api";
+import { AppLogger } from "./utils/AppLogger";
 
 async function startServer() {
   const app: Express = express();
@@ -15,7 +17,11 @@ async function startServer() {
   });
 
   app.listen(port, () => {
-    console.log(`Running in port ${port}`);
+    AppLogger({
+      type: LoggerTypes.INFO,
+      logReturn: LoggerReturn.SUCCESS,
+      logMessage: `Server is running on port ${port}.`,
+    });
   });
 }
 
