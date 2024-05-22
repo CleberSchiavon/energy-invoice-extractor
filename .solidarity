@@ -1,0 +1,34 @@
+{
+  "config": {
+    "output": "moderate"
+  },
+  "requirements": {
+    "Bash": [
+      {
+        "rule": "cli",
+        "binary": "bash"
+      }
+    ],
+    "Node": [
+      {
+        "rule": "cli",
+        "binary": "node",
+        "semver": ">= 18.x"
+      }
+    ],
+    "PNPM": [
+      {
+        "rule": "cli",
+        "binary": "pnpm",
+        "semver": "8.9.0"
+      }
+    ],
+    "Git email": [
+      {
+        "rule": "shell",
+        "command": "git config core.ignorecase",
+        "match": "true"
+      }
+    ]
+  }
+}

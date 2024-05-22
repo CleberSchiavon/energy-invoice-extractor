@@ -1,14 +1,8 @@
 {
   "compilerOptions": {
-    "include": [
-      "**/*.ts",
-      "src//*.json",
-      ".env"
-    ],
+    "include": ["**/*.ts", "src//*.json", ".env"],
     "target": "ES2021",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -26,14 +20,10 @@
     "importHelpers": true,
     "baseUrl": "./",
     "paths": {
-      "~/@": [
-        "./src/*"
-      ]
+      "~/@": ["./src/*"]
     }
   },
   "ts-node": {
-    "require": [
-      "tsconfig-paths/register"
-    ]
+    "require": ["tsconfig-paths/register"]
   }
 }

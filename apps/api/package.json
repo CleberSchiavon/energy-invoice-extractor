@@ -7,7 +7,7 @@
   "scripts": {
     "presetup": "npm install",
     "dev": "nodemon",
-    "start": "npm run build && node dist/index.js",
+    "start": "pnpm run build && node dist/index.js",
     "build": "tsc && tsc-alias",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --detectOpenHandles",
