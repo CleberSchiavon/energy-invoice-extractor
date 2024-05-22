@@ -5,8 +5,8 @@ const LogError = chalk.redBright
 const LogSuccess = chalk.greenBright
 const LogInfo = chalk.cyan
 
-const logMessage = (prefix: string, message: string) => {
-  console.log(`[${prefix}] [${new Date().toISOString()}] ${message}`)
+const logMessage = (prefix: string, apiReturn: string, message: string) => {
+  console.log(`[${prefix}] [${apiReturn}] [${new Date().toISOString()}] ${message}`)
 }
 
 export const AppLogger = ({ type, logReturn, logMessage: message }: IAppLogger) => {
@@ -29,13 +29,13 @@ export const AppLogger = ({ type, logReturn, logMessage: message }: IAppLogger) 
 
   switch (type) {
     case LoggerTypes.SERVER:
-      logMessage(LoggerTypes.SERVER, logFunction(message))
+      logMessage(LoggerTypes.SERVER, logReturn, logFunction(message))
       break
     case LoggerTypes.INFO:
-      logMessage(LoggerTypes.INFO, logFunction(message))
+      logMessage(LoggerTypes.INFO, logReturn, logFunction(message))
       break
     case LoggerTypes.DATABASE_ERROR:
-      logMessage(LoggerTypes.DATABASE_ERROR, logFunction(message))
+      logMessage(LoggerTypes.DATABASE_ERROR, logReturn, logFunction(message))
       break
     default:
       console.warn(`Unknown logger type: ${type}`)

@@ -31,7 +31,7 @@ describe('AppLogger', () => {
     AppLogger(loggerParams)
 
     expect(logSpy).toHaveBeenCalledWith(
-      `[SERVER] [2024-05-22T02:51:38.710Z] ${chalk.greenBright(message)}`,
+      `[${loggerParams.type}] [${loggerParams.logReturn}] [2024-05-22T02:51:38.710Z] ${chalk.greenBright(message)}`,
     )
   })
 
@@ -48,7 +48,7 @@ describe('AppLogger', () => {
     AppLogger(loggerParams)
 
     expect(logSpy).toHaveBeenCalledWith(
-      `[DATABASE_ERROR] [2024-05-22T02:51:38.710Z] ${chalk.redBright(message)}`,
+      `[${loggerParams.type}] [${loggerParams.logReturn}] [2024-05-22T02:51:38.710Z] ${chalk.redBright(message)}`,
     )
   })
 
@@ -64,7 +64,9 @@ describe('AppLogger', () => {
 
     AppLogger(loggerParams)
 
-    expect(logSpy).toHaveBeenCalledWith(`[INFO] [2024-05-22T02:51:38.710Z] ${chalk.cyan(message)}`)
+    expect(logSpy).toHaveBeenCalledWith(
+      `[${loggerParams.type}] [${loggerParams.logReturn}] [2024-05-22T02:51:38.710Z] ${chalk.cyan(message)}`,
+    )
   })
 
   it('should warn for unknown logReturn type', () => {

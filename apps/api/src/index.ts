@@ -3,9 +3,10 @@ import bodyParser from 'body-parser'
 import helmet from 'helmet'
 import cors from 'cors'
 import { LoggerReturn, LoggerTypes } from '@repo/types/api'
-import { AppLogger } from './utils/AppLogger'
+import { AppLogger } from './utils'
 import validateEnv from './utils/validateEnv'
 import { PrismaClient as DBClient } from '@repo/database-tools'
+import invoiceRouter from './routes/invoiceRouter'
 
 validateEnv()
 
@@ -24,7 +25,7 @@ async function startServer() {
   app.use(helmet())
   app.use(cors())
   app.use(express.json())
-
+  app.use('/invoices', invoiceRouter)
   app.get('/', (req: Request, res: Response) => {
     res.send('Express + TypeScript')
   })
