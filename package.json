@@ -3,10 +3,12 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "prepare-env": "solidarity && pnpm install && pnpm husky:install",
+    "prepare-repo": "bash ./scripts/prepare-repo.sh",
+    "clean-repo": "bash ./scripts/clean.sh",
     "build": "turbo build",
     "dev": "dotenv -- turbo run dev",
     "api:dev": "dotenv -- turbo run dev --filter=./apps/api/",
+    "api:database-generate": "dotenv -- turbo db:push db:generate",
     "frontend:dev": "dotenv -- turbo run dev --filter=./apps/web/",
     "husky:install": "bash ./scripts/husky.sh",
     "audit:commit": "bash ./scripts/branch-audit.sh",

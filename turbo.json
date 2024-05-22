@@ -1,18 +1,17 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "dev:api": {
-      "outputs": [
-        "dist/**"
+    "dev": {
+      "dependsOn": [
+        "^db:generate"
       ],
-      "env": [
-        "API_PORT",
-        "API_DB_POSTGRE_URL"
-      ]
+      "cache": false,
+      "persistent": true
     },
     "build": {
       "dependsOn": [
-        "^build"
+        "^build",
+        "^db:generate"
       ],
       "outputs": [
         "dist/**",
@@ -25,9 +24,14 @@
         "^lint"
       ]
     },
-    "dev": {
+    "db:generate": {
       "cache": false,
-      "persistent": true
+      "env": [
+        "API_DB_POSTGRE_URL"
+      ]
+    },
+    "db:push": {
+      "cache": false
     }
   }
 }

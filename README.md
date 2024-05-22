@@ -3,7 +3,7 @@
 ## Install Project
 
 ```sh
-pnpm run prepare-env
+pnpm run prepare-repo
 ```
 
 ### Apps and Packages

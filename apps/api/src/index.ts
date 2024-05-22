@@ -5,11 +5,15 @@ import cors from 'cors'
 import { LoggerReturn, LoggerTypes } from '@repo/types/api'
 import { AppLogger } from './utils/AppLogger'
 import validateEnv from './utils/validateEnv'
+import { PrismaClient as DBClient } from '@repo/database-tools'
+
 validateEnv()
 
 async function startServer() {
   const app: Express = express()
   const port = process.env.API_PORT || 3000
+  const prismaClient = new DBClient()
+
   app.use(bodyParser.json())
   app.use(
     bodyParser.urlencoded({
