@@ -2,22 +2,28 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "dev:api": {
-      "outputs": ["dist/**"],
+      "outputs": [
+        "dist/**"
+      ],
       "env": [
         "API_PORT",
-        "API_DB_NAME",
-        "API_DB_USER",
-        "API_DB_PASSWORD",
-        "API_DB_HOST",
-        "API_DB_PORT"
+        "API_DB_POSTGRE_URL"
       ]
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "dev": {
       "cache": false,
