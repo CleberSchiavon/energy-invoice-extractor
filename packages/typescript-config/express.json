@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "include": [
+      "**/*.ts",
+      "src//*.json",
+      ".env"
+    ],
     "target": "ES2021",
     "typeRoots": [
       "node_modules/@types"
@@ -19,21 +24,16 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "baseUrl": "src",
+    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "*"
+      "~/@": [
+        "./src/*"
       ]
     }
   },
-  "include": [
-    "**/*.ts",
-    "src//*.json",
-    ".env"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist"
-  ]
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  }
 }
