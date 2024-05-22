@@ -5,7 +5,6 @@ import cors from 'cors'
 import { LoggerReturn, LoggerTypes } from '@repo/types/api'
 import { AppLogger } from './utils'
 import validateEnv from './utils/validateEnv'
-import { PrismaClient as DBClient } from '@repo/database-tools'
 import invoiceRouter from './routes/invoiceRouter'
 
 validateEnv()
@@ -13,7 +12,6 @@ validateEnv()
 async function startServer() {
   const app: Express = express()
   const port = process.env.API_PORT || 3000
-  const prismaClient = new DBClient()
 
   app.use(bodyParser.json())
   app.use(

@@ -40,6 +40,7 @@
     "@types/pdf-parse": "^1.1.4",
     "chalk": "4.1.2",
     "eslint": "^8.57.0",
+    "eslint-plugin-prettier": "^5.1.3",
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10",

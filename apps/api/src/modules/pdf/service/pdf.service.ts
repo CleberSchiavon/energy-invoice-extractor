@@ -1,8 +1,19 @@
 import pdfParser from 'pdf-parse'
 import fs from 'fs'
 import { ClientPDFData, LoggerTypes, LoggerReturn } from '@repo/types/api'
-import { AppLogger } from '../../../utils/'
-import { extractPdfData } from '../../../utils/pdf/pdfHandlers'
+import { AppLogger, extractPdfData } from '~/utils/'
+import multer from 'multer'
+import { RequestHandler } from 'express'
+
+export class TempStoragePdfService {
+  private static fileStorage = multer.diskStorage({
+    filename: (req, file, cb) => {
+      cb(null, file.originalname)
+    },
+  })
+
+  static uploadPdfs: RequestHandler = multer({ storage: this.fileStorage }).array('pdfInvoice')
+}
 
 export const parsePdfContent = async (
   pdfFilePath: string,

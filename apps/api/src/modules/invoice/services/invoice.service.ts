@@ -1,6 +1,6 @@
 import { ClientPDFData, LoggerReturn, LoggerTypes } from '@repo/types/api'
-import { parsePdfContent } from './pdf.service'
-import { AppLogger } from '../../../utils'
+import { PdfModule } from '~/modules/pdf/'
+import { AppLogger } from '~/utils'
 
 export default class InvoiceService {
   static async handleInvoiceFiles(invoiceFiles: Express.Multer.File[]): Promise<ClientPDFData[]> {
@@ -16,7 +16,7 @@ export default class InvoiceService {
           sceeIcmsDetails,
           compensatedEnergy,
           publicLightingContribution,
-        } = await parsePdfContent(document.path, document.filename)
+        } = await PdfModule.pdfContentService(document.path, document.filename)
 
         const clientPdfData: ClientPDFData = {
           fileName: document.filename,

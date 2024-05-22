@@ -1,4 +1,10 @@
 {
   "include": ["**/*.ts", "src//*.json", ".env"],
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "baseUrl": "./"
+  },
   "extends": "@repo/typescript-config/express.json"
 }

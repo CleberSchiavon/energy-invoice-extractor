@@ -1,13 +1,13 @@
 import express, { Request, Response, Router } from 'express'
 import { LoggerReturn, LoggerTypes } from '@repo/types/api'
-import InvoiceController from '../modules/invoice/controllers/invoice.controller'
-import { AppLogger } from '../utils'
-import { TempStorageService } from '../modules/invoice/services/tempStorage.service'
+import { AppLogger } from '~/utils'
+import { InvoiceModule } from '~/modules/invoice'
+import { PdfModule } from '~/modules/pdf/'
 
 const invoiceRouter: Router = express.Router()
 invoiceRouter.post(
   '/new-invoice',
-  TempStorageService.uploadPdfs,
+  PdfModule.tempStorageService.uploadPdfs,
   async (request: Request, response: Response) => {
     const invoiceFiles = request.files as Express.Multer.File[]
     try {
@@ -19,7 +19,7 @@ invoiceRouter.post(
         })
         return response.status(400).json({ errorStatusCode: 400, errorMessage: 'No file uploaded' })
       }
-      return await InvoiceController.processInvoiceFile(invoiceFiles, response)
+      return await InvoiceModule.controller.processInvoiceFile(invoiceFiles, response)
     } catch (error) {
       AppLogger({
         type: LoggerTypes.SERVER,

@@ -8,7 +8,7 @@ const config: Config = {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
   moduleNameMapper: {
-    '^~/(@)(.*)$': '<rootDir>/src/$2',
+    '~/(.*)': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   testEnvironment: 'node',

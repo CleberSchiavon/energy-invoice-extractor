@@ -15,13 +15,7 @@
     "noEmit": false,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "importHelpers": true,
-    "baseUrl": "./",
-    "paths": {
-      "~/@": [
-        "./src/*"
-      ]
-    }
+    "importHelpers": true
   },
   "ts-node": {
     "require": [
