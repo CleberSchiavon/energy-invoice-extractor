@@ -1,3 +1,4 @@
 {
+  "include": ["**/*.ts", "src//*.json", ".env"],
   "extends": "@repo/typescript-config/express.json"
 }
