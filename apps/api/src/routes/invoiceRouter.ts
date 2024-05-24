@@ -15,6 +15,15 @@ invoiceRouter.get('', async (request: Request, response: Response) => {
   }
 })
 
+invoiceRouter.get('/:clientNumber', async (request: Request, response: Response) => {
+  try {
+    const invoices = await InvoiceModule.controller.getInvoicesByClientNumber(request)
+    return response.status(200).json(invoices)
+  } catch (error) {
+    return response.status(error.errorStatusCode).json(error)
+  }
+})
+
 invoiceRouter.post(
   '/new-invoice',
   PdfModule.tempStorageService.uploadPdfs,

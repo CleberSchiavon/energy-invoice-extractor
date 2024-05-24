@@ -6,7 +6,7 @@ export interface InvoiceDetails {
 
 export interface InvoicePDFData {
   isCemigInvoice: boolean
-  fileName: string
+  invoiceFileName: string
   clientNumber: string
   installationNumber: string
   referenceMonth: string | null

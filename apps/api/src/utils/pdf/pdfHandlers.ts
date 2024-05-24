@@ -65,7 +65,7 @@ export const verifyIfIsCemigInvoice = (text: string) => {
 }
 export const extractPdfData = (textContent: string, pdfFileName: string) => {
   return {
-    fileName: pdfFileName,
+    invoiceFileName: pdfFileName,
     isCemigInvoice: verifyIfIsCemigInvoice(textContent),
     clientNumber: getClientNumber(textContent),
     installationNumber: getInstallationNumber(textContent),

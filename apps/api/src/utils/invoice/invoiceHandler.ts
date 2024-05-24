@@ -3,7 +3,7 @@ import { InvoiceDatabaseType, InvoicePDFData } from '@repo/types/api'
 export const filterInvoiceDataToDatabase = (invoices: InvoiceDatabaseType[]) => {
   return invoices.map(
     ({
-      fileName,
+      isCemigInvoice,
       clientNumber,
       electricDetails,
       publicLightingContribution,

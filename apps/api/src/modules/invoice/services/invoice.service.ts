@@ -21,7 +21,7 @@ export default class InvoiceService {
         } = await PdfModule.pdfContentService(document.path, document.filename)
         const invoicePdfData: InvoicePDFData = {
           isCemigInvoice,
-          fileName: document.filename,
+          invoiceFileName: document.filename,
           clientNumber,
           installationNumber,
           referenceMonth,
@@ -35,12 +35,12 @@ export default class InvoiceService {
         AppLogger({
           type: LoggerTypes.INFO,
           logReturn: LoggerReturn.SUCCESS,
-          logMessage: `${HttpStatusMessages.PDF_PROCESSING_SUCCESSFULLY} ${invoicePdfData.fileName}`,
+          logMessage: `${HttpStatusMessages.PDF_PROCESSING_SUCCESSFULLY} ${invoicePdfData.invoiceFileName}`,
         })
       } catch (error) {
         const errorPdfData: InvoicePDFData = {
           isCemigInvoice: null,
-          fileName: document.filename,
+          invoiceFileName: document.filename,
           clientNumber: '',
           installationNumber: '',
           referenceMonth: null,
@@ -54,7 +54,7 @@ export default class InvoiceService {
         AppLogger({
           type: LoggerTypes.INFO,
           logReturn: LoggerReturn.ERROR,
-          logMessage: `${HttpStatusMessages.PDF_EXTRACT_DATA_ERROR} ${errorPdfData.fileName}: ${error.errorMessage}`,
+          logMessage: `${HttpStatusMessages.PDF_EXTRACT_DATA_ERROR} ${errorPdfData.invoiceFileName}: ${error.errorMessage}`,
         })
         throw error
       }

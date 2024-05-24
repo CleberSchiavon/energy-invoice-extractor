@@ -3,7 +3,7 @@ import fs from 'fs'
 import { InvoicePDFData, LoggerTypes, LoggerReturn, HttpStatusMessages } from '@repo/types/api'
 import { AppLogger, extractPdfData, verifyIfIsCemigInvoice } from '~/utils/'
 import multer from 'multer'
-import { RequestHandler, Response } from 'express'
+import { RequestHandler } from 'express'
 import { ErrorHandling } from '~/utils/ErrorHandling'
 
 export class TempStoragePdfService {
