@@ -32,6 +32,12 @@
     },
     "db:push": {
       "cache": false
+    },
+    "test": {
+      "dependsOn": []
+    },
+    "test:watch": {
+      "dependsOn": []
     }
   }
 }
