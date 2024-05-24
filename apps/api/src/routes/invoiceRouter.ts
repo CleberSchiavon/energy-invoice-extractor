@@ -6,6 +6,15 @@ import { PdfModule } from '~/modules/pdf/'
 import { ErrorHandling } from '~/utils/ErrorHandling'
 const invoiceRouter: Router = express.Router()
 
+invoiceRouter.get('', async (request: Request, response: Response) => {
+  try {
+    const invoices = await InvoiceModule.controller.getAllInvoices()
+    return response.status(200).json(invoices)
+  } catch (error) {
+    return response.status(400).json(error)
+  }
+})
+
 invoiceRouter.post(
   '/new-invoice',
   PdfModule.tempStorageService.uploadPdfs,

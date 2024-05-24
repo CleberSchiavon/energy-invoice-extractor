@@ -6,6 +6,19 @@ import InvoiceRepository from '../repository/invoice.repository'
 import { ErrorHandling } from '~/utils/ErrorHandling'
 
 export default class InvoiceController {
+  static async getAllInvoices() {
+    try {
+      const invoices = InvoiceRepository.get()
+      return invoices
+    } catch (error) {
+      AppLogger({
+        logReturn: LoggerReturn.ERROR,
+        type: LoggerTypes.SERVER,
+        logMessage: `${HttpStatusMessages.ERROR_GETIING_ALL_INVOICES} ${error.errorMessage}`,
+      })
+      throw error
+    }
+  }
   static async processInvoiceFile(invoiceFiles: Express.Multer.File[], response: Response) {
     try {
       const invoiceResults = await InvoiceService.handleInvoiceFiles(invoiceFiles)

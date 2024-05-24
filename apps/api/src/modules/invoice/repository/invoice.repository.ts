@@ -6,6 +6,18 @@ import { filterInvoiceDataToDatabase } from '~/utils/invoice/invoiceHandler'
 export default class InvoiceRepository {
   static prismaClient: PrismaClient = new PrismaClient()
 
+  static async get() {
+    try {
+      const allInvoices = await this.prismaClient.invoice.findMany()
+      return allInvoices
+    } catch (error) {
+      AppLogger({
+        logReturn: LoggerReturn.ERROR,
+        type: LoggerTypes.DATABASE_ERROR,
+        logMessage: `${HttpStatusMessages.ERROR_GETIING_ALL_INVOICES} ${error.errorMessage}`,
+      })
+    }
+  }
   static async create(invoiceData: InvoicePDFData[]) {
     const newInvoiceData = filterInvoiceDataToDatabase(invoiceData)
     const createdInvoices = []
