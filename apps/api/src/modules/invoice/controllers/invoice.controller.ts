@@ -1,5 +1,5 @@
 import { Response } from 'express'
-import { LoggerReturn, LoggerTypes } from '@repo/types/api'
+import { LoggerReturn, LoggerTypes, HttpStatusMessages } from '@repo/types/api'
 import { AppLogger } from '~/utils'
 import InvoiceService from '../services/invoice.service'
 import InvoiceRepository from '../repository/invoice.repository'
@@ -11,14 +11,7 @@ export default class InvoiceController {
       const invoiceResults = await InvoiceService.handleInvoiceFiles(invoiceFiles)
       invoiceResults.map((result) => {
         if (!result.isCemigInvoice) {
-          response
-            .status(400)
-            .send(
-              ErrorHandling(
-                400,
-                'Error when trying to process your invoice, check if the document you sent is a CEMIG invoice',
-              ),
-            )
+          response.status(400).send(ErrorHandling(400, HttpStatusMessages.IS_NOT_CEMIG_INVOICE))
         }
       })
       const { createdInvoices, notCreatedInvoices } = await InvoiceRepository.create(invoiceResults)
@@ -35,7 +28,7 @@ export default class InvoiceController {
       AppLogger({
         type: LoggerTypes.SERVER,
         logReturn: LoggerReturn.ERROR,
-        logMessage: `Error processing Invoices: ${error}`,
+        logMessage: `${HttpStatusMessages.ERROR_PROCESSING_INVOICES} ${error}`,
       })
 
       return response.status(500).json({ errorStatusCode: 500, errorMessage: error.message })
@@ -47,7 +40,7 @@ export default class InvoiceController {
       AppLogger({
         type: LoggerTypes.SERVER,
         logReturn: LoggerReturn.ERROR,
-        logMessage: `Error getting all invoices: ${error}`,
+        logMessage: `${HttpStatusMessages.ERROR_GETIING_ALL_INVOICES} ${error}`,
       })
     }
   }

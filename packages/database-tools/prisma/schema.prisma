@@ -7,6 +7,12 @@ datasource db {
   url      = env("API_DB_POSTGRE_URL")
 }
 
+model Client {
+  id           Int    @id @default(autoincrement())
+  clientNumber Float
+  clientName   String
+}
+
 model Invoice {
   id                          Int     @id @default(autoincrement())
   installationNumber          String

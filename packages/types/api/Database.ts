@@ -1,4 +1,4 @@
-import { InvoicePDFData } from './Client'
+import { InvoicePDFData } from './Invoice'
 
 export type RemovingInvoice = Omit<InvoicePDFData, 'clientNumber' | 'publicLightingContribution'>
 

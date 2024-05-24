@@ -9,7 +9,7 @@ import invoiceRouter from './routes/invoiceRouter'
 import { PrismaClient } from '@repo/database-tools'
 validateEnv()
 
-async function startServer() {
+export async function startServer() {
   const app: Express = express()
   const port = process.env.API_PORT || 3000
   const prisma = new PrismaClient()

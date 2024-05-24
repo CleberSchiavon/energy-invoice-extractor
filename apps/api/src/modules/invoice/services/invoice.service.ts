@@ -1,4 +1,4 @@
-import { InvoicePDFData, LoggerReturn, LoggerTypes } from '@repo/types/api'
+import { HttpStatusMessages, InvoicePDFData, LoggerReturn, LoggerTypes } from '@repo/types/api'
 import { Response } from 'express'
 import { PdfModule } from '~/modules/pdf/'
 import { AppLogger } from '~/utils'
@@ -36,7 +36,7 @@ export default class InvoiceService {
         AppLogger({
           type: LoggerTypes.INFO,
           logReturn: LoggerReturn.SUCCESS,
-          logMessage: `PDF ${invoicePdfData.fileName} processed successfully`,
+          logMessage: `${HttpStatusMessages.PDF_PROCESSING_SUCCESSFULLY} ${invoicePdfData.fileName}`,
         })
       } catch (error) {
         const errorPdfData: InvoicePDFData = {
@@ -55,7 +55,7 @@ export default class InvoiceService {
         AppLogger({
           type: LoggerTypes.INFO,
           logReturn: LoggerReturn.ERROR,
-          logMessage: `Error extracting data from PDF ${errorPdfData.fileName}: ${error}`,
+          logMessage: `${HttpStatusMessages.PDF_EXTRACT_DATA_ERROR} ${errorPdfData.fileName}: ${error}`,
         })
       }
     }

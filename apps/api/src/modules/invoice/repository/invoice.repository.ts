@@ -1,5 +1,5 @@
 import { PrismaClient } from '@repo/database-tools'
-import { LoggerReturn, LoggerTypes, InvoicePDFData } from '@repo/types/'
+import { LoggerReturn, LoggerTypes, InvoicePDFData, HttpStatusMessages } from '@repo/types/'
 import { AppLogger } from '~/utils'
 import { filterInvoiceDataToDatabase } from '~/utils/invoice/invoiceHandler'
 
@@ -34,7 +34,7 @@ export default class InvoiceRepository {
       AppLogger({
         type: LoggerTypes.INFO,
         logReturn: LoggerReturn.ERROR,
-        logMessage: `Error when creating invoices in the database: ${error}`,
+        logMessage: `${HttpStatusMessages.ERROR_CREATING_INVOICES} ${error}`,
       })
       throw error
     }

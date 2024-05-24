@@ -1,6 +1,6 @@
 import pdfParser from 'pdf-parse'
 import fs from 'fs'
-import { InvoicePDFData, LoggerTypes, LoggerReturn } from '@repo/types/api'
+import { InvoicePDFData, LoggerTypes, LoggerReturn, HttpStatusMessages } from '@repo/types/api'
 import { AppLogger, extractPdfData, verifyIfIsCemigInvoice } from '~/utils/'
 import multer from 'multer'
 import { RequestHandler, Response } from 'express'
@@ -29,8 +29,8 @@ export const parsePdfContent = async (
     AppLogger({
       type: LoggerTypes.INFO,
       logReturn: LoggerReturn.ERROR,
-      logMessage: `Error extracting PDF: ${err}`,
+      logMessage: `${HttpStatusMessages.PDF_EXTRACT_DATA_ERROR} ${err}`,
     })
-    throw new Error('Error extracting PDF data')
+    throw new Error(HttpStatusMessages.PDF_EXTRACT_DATA_ERROR)
   }
 }
