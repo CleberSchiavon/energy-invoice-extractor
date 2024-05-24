@@ -1,4 +1,5 @@
 import { InvoicePDFData, LoggerReturn, LoggerTypes } from '@repo/types/api'
+import { Response } from 'express'
 import { PdfModule } from '~/modules/pdf/'
 import { AppLogger } from '~/utils'
 
@@ -9,6 +10,7 @@ export default class InvoiceService {
     for (const document of invoiceFiles) {
       try {
         const {
+          isCemigInvoice,
           clientNumber,
           installationNumber,
           referenceMonth,
@@ -19,6 +21,7 @@ export default class InvoiceService {
         } = await PdfModule.pdfContentService(document.path, document.filename)
 
         const invoicePdfData: InvoicePDFData = {
+          isCemigInvoice,
           fileName: document.filename,
           clientNumber,
           installationNumber,
@@ -30,7 +33,6 @@ export default class InvoiceService {
         }
 
         clientResults.push(invoicePdfData)
-
         AppLogger({
           type: LoggerTypes.INFO,
           logReturn: LoggerReturn.SUCCESS,
@@ -38,6 +40,7 @@ export default class InvoiceService {
         })
       } catch (error) {
         const errorPdfData: InvoicePDFData = {
+          isCemigInvoice: null,
           fileName: document.filename,
           clientNumber: '',
           installationNumber: '',

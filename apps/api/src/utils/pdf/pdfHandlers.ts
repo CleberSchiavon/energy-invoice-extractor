@@ -59,9 +59,14 @@ export const getPublicLightingContribution = (text: string): string | null => {
   return match ? match[1] : null
 }
 
-export const extractPdfData = (textContent: string, pdfFileName: string): InvoicePDFData => {
+export const verifyIfIsCemigInvoice = (text: string) => {
+  const match = text.includes('CEMIG DISTRIBUIÇÃO S.A')
+  return match
+}
+export const extractPdfData = (textContent: string, pdfFileName: string) => {
   return {
     fileName: pdfFileName,
+    isCemigInvoice: verifyIfIsCemigInvoice(textContent),
     clientNumber: getClientNumber(textContent),
     installationNumber: getInstallationNumber(textContent),
     referenceMonth: getReferenceMonth(textContent),

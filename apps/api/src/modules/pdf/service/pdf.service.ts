@@ -1,9 +1,10 @@
 import pdfParser from 'pdf-parse'
 import fs from 'fs'
 import { InvoicePDFData, LoggerTypes, LoggerReturn } from '@repo/types/api'
-import { AppLogger, extractPdfData } from '~/utils/'
+import { AppLogger, extractPdfData, verifyIfIsCemigInvoice } from '~/utils/'
 import multer from 'multer'
-import { RequestHandler } from 'express'
+import { RequestHandler, Response } from 'express'
+import { ErrorHandling } from '~/utils/ErrorHandling'
 
 export class TempStoragePdfService {
   private static fileStorage = multer.diskStorage({
