@@ -24,13 +24,17 @@ export const parsePdfContent = async (
     const fileBuffer = fs.readFileSync(pdfFilePath)
     const parsedData = await pdfParser(fileBuffer)
     const textContent = parsedData.text
-    return extractPdfData(textContent, pdfFileName)
+    if (verifyIfIsCemigInvoice(textContent) == true) {
+      return extractPdfData(textContent, pdfFileName)
+    } else {
+      throw ErrorHandling(500, HttpStatusMessages.IS_NOT_CEMIG_INVOICE)
+    }
   } catch (err) {
     AppLogger({
       type: LoggerTypes.INFO,
       logReturn: LoggerReturn.ERROR,
-      logMessage: `${HttpStatusMessages.PDF_EXTRACT_DATA_ERROR} ${err}`,
+      logMessage: `${HttpStatusMessages.PDF_EXTRACT_DATA_ERROR} ${JSON.stringify(err.errorMessage)}`,
     })
-    throw new Error(HttpStatusMessages.PDF_EXTRACT_DATA_ERROR)
+    throw err
   }
 }

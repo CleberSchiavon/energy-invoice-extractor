@@ -5,4 +5,6 @@ export enum HttpStatusMessages {
   ERROR_CREATING_INVOICES = 'Error when creating invoices in the database:',
   PDF_PROCESSING_SUCCESSFULLY = 'PDF processed successfully',
   PDF_EXTRACT_DATA_ERROR = 'Error extracting data from PDF',
+  ERROR_CALLING_NEW_INVOICE = 'An error occurred when calling /new-invoice route:',
+  ERROR_GETTING_INVOICE = 'An error ocured when try to get a invoice:',
 }

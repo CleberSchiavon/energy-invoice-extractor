@@ -19,7 +19,6 @@ export default class InvoiceService {
           compensatedEnergy,
           publicLightingContribution,
         } = await PdfModule.pdfContentService(document.path, document.filename)
-
         const invoicePdfData: InvoicePDFData = {
           isCemigInvoice,
           fileName: document.filename,
@@ -55,8 +54,9 @@ export default class InvoiceService {
         AppLogger({
           type: LoggerTypes.INFO,
           logReturn: LoggerReturn.ERROR,
-          logMessage: `${HttpStatusMessages.PDF_EXTRACT_DATA_ERROR} ${errorPdfData.fileName}: ${error}`,
+          logMessage: `${HttpStatusMessages.PDF_EXTRACT_DATA_ERROR} ${errorPdfData.fileName}: ${error.errorMessage}`,
         })
+        throw error
       }
     }
 

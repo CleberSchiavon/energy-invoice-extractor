@@ -9,11 +9,6 @@ export default class InvoiceController {
   static async processInvoiceFile(invoiceFiles: Express.Multer.File[], response: Response) {
     try {
       const invoiceResults = await InvoiceService.handleInvoiceFiles(invoiceFiles)
-      invoiceResults.map((result) => {
-        if (!result.isCemigInvoice) {
-          response.status(400).send(ErrorHandling(400, HttpStatusMessages.IS_NOT_CEMIG_INVOICE))
-        }
-      })
       const { createdInvoices, notCreatedInvoices } = await InvoiceRepository.create(invoiceResults)
 
       const statusCode = createdInvoices.length > 0 ? 201 : 500
@@ -28,20 +23,10 @@ export default class InvoiceController {
       AppLogger({
         type: LoggerTypes.SERVER,
         logReturn: LoggerReturn.ERROR,
-        logMessage: `${HttpStatusMessages.ERROR_PROCESSING_INVOICES} ${error}`,
+        logMessage: `${HttpStatusMessages.ERROR_PROCESSING_INVOICES} ${error.errorMessage}`,
       })
 
-      return response.status(500).json({ errorStatusCode: 500, errorMessage: error.message })
-    }
-  }
-  static async getAllInvoices(request, response) {
-    try {
-    } catch (error) {
-      AppLogger({
-        type: LoggerTypes.SERVER,
-        logReturn: LoggerReturn.ERROR,
-        logMessage: `${HttpStatusMessages.ERROR_GETIING_ALL_INVOICES} ${error}`,
-      })
+      return response.status(500).json({ errorStatusCode: 500, errorMessage: error.errorMessage })
     }
   }
 }

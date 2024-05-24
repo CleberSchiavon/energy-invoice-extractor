@@ -1,10 +1,11 @@
 import express, { Request, Response, Router } from 'express'
-import { LoggerReturn, LoggerTypes } from '@repo/types/api'
+import { HttpStatusMessages, LoggerReturn, LoggerTypes } from '@repo/types/api'
 import { AppLogger } from '~/utils'
 import { InvoiceModule } from '~/modules/invoice'
 import { PdfModule } from '~/modules/pdf/'
-
+import { ErrorHandling } from '~/utils/ErrorHandling'
 const invoiceRouter: Router = express.Router()
+
 invoiceRouter.post(
   '/new-invoice',
   PdfModule.tempStorageService.uploadPdfs,
@@ -24,8 +25,11 @@ invoiceRouter.post(
       AppLogger({
         type: LoggerTypes.SERVER,
         logReturn: LoggerReturn.ERROR,
-        logMessage: `An error occurred when calling /new-invoice route: ${error}`,
+        logMessage: `${HttpStatusMessages.ERROR_CALLING_NEW_INVOICE} ${error}`,
       })
+      return response
+        .status(500)
+        .json(ErrorHandling(500, HttpStatusMessages.ERROR_CALLING_NEW_INVOICE))
     }
   },
 )

@@ -1,4 +1,4 @@
-import { InvoicePDFData, InvoiceDetails } from '@repo/types/api'
+import { InvoiceDetails } from '@repo/types/api'
 
 export const getClientNumber = (text: string): string => {
   const words = text.split(' ').filter(Boolean)
