@@ -1,4 +1,4 @@
-import { ClientPDFData, EnergyDetails } from '@repo/types/api'
+import { InvoicePDFData, InvoiceDetails } from '@repo/types/api'
 
 export const getClientNumber = (text: string): string => {
   const words = text.split(' ').filter(Boolean)
@@ -17,7 +17,7 @@ export const getReferenceMonth = (text: string): string | null => {
   return match ? match[0] : null
 }
 
-export const getElectricDetails = (text: string): EnergyDetails | null => {
+export const getElectricDetails = (text: string): InvoiceDetails | null => {
   const match = text.match(/Energia Elétrica\s*kWh\s*([\d.]+)\s*[\d.,]+\s*([\d.,]+)/)
   return match
     ? {
@@ -28,7 +28,7 @@ export const getElectricDetails = (text: string): EnergyDetails | null => {
     : null
 }
 
-export const getSceeIcmsDetails = (text: string): EnergyDetails | null => {
+export const getSceeIcmsDetails = (text: string): InvoiceDetails | null => {
   const match = text.match(
     /Energia SCEE s\/ ICMSkWh\s+(\d+(?:\.\d+)?)\s+(\d+(?:,\d+)?)\s+(\d+(?:,\d+)?)/,
   )
@@ -41,7 +41,7 @@ export const getSceeIcmsDetails = (text: string): EnergyDetails | null => {
     : null
 }
 
-export const getCompensatedEnergyDetails = (text: string): EnergyDetails | null => {
+export const getCompensatedEnergyDetails = (text: string): InvoiceDetails | null => {
   const match = text.match(
     /Energia compensada GD IkWh\s+(\d+(?:[,.]\d+)?)\s+(\d+(?:[,.]\d+)?)\s+(-?\d+(?:[,.]\d+)?)/,
   )
@@ -59,7 +59,7 @@ export const getPublicLightingContribution = (text: string): string | null => {
   return match ? match[1] : null
 }
 
-export const extractPdfData = (textContent: string, pdfFileName: string): ClientPDFData => {
+export const extractPdfData = (textContent: string, pdfFileName: string): InvoicePDFData => {
   return {
     fileName: pdfFileName,
     clientNumber: getClientNumber(textContent),

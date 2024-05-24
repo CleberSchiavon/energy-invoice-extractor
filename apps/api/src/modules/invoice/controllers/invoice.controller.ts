@@ -2,19 +2,30 @@ import { Response } from 'express'
 import { LoggerReturn, LoggerTypes } from '@repo/types/api'
 import { AppLogger } from '~/utils'
 import InvoiceService from '../services/invoice.service'
+import InvoiceRepository from '../repository/invoice.repository'
 
 export default class InvoiceController {
   static async processInvoiceFile(invoiceFiles: Express.Multer.File[], response: Response) {
     try {
       const invoiceResults = await InvoiceService.handleInvoiceFiles(invoiceFiles)
-      return response.status(201).json(invoiceResults)
+      const { createdInvoices, notCreatedInvoices } = await InvoiceRepository.create(invoiceResults)
+
+      const statusCode = createdInvoices.length > 0 ? 201 : 500
+
+      return response.status(statusCode).json({
+        error: statusCode !== 201,
+        allInvoicesCreated: notCreatedInvoices.length < 1,
+        createdInvoices,
+        notCreatedInvoices,
+      })
     } catch (error) {
       AppLogger({
         type: LoggerTypes.SERVER,
         logReturn: LoggerReturn.ERROR,
-        logMessage: `Error processing PDF: ${error}`,
+        logMessage: `Error processing Invoices: ${error}`,
       })
-      return response.status(500).json({ errorStatusCode: 500, errorMessage: error })
+
+      return response.status(500).json({ errorStatusCode: 500, errorMessage: error.message })
     }
   }
 }

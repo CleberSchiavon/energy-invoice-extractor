@@ -1,10 +1,10 @@
-import { ClientPDFData, LoggerReturn, LoggerTypes } from '@repo/types/api'
+import { InvoicePDFData, LoggerReturn, LoggerTypes } from '@repo/types/api'
 import { PdfModule } from '~/modules/pdf/'
 import { AppLogger } from '~/utils'
 
 export default class InvoiceService {
-  static async handleInvoiceFiles(invoiceFiles: Express.Multer.File[]): Promise<ClientPDFData[]> {
-    const clientResults: ClientPDFData[] = []
+  static async handleInvoiceFiles(invoiceFiles: Express.Multer.File[]): Promise<InvoicePDFData[]> {
+    const clientResults: InvoicePDFData[] = []
 
     for (const document of invoiceFiles) {
       try {
@@ -18,7 +18,7 @@ export default class InvoiceService {
           publicLightingContribution,
         } = await PdfModule.pdfContentService(document.path, document.filename)
 
-        const clientPdfData: ClientPDFData = {
+        const invoicePdfData: InvoicePDFData = {
           fileName: document.filename,
           clientNumber,
           installationNumber,
@@ -29,15 +29,15 @@ export default class InvoiceService {
           publicLightingContribution,
         }
 
-        clientResults.push(clientPdfData)
+        clientResults.push(invoicePdfData)
 
         AppLogger({
           type: LoggerTypes.INFO,
           logReturn: LoggerReturn.SUCCESS,
-          logMessage: `PDF ${clientPdfData.fileName} processed successfully`,
+          logMessage: `PDF ${invoicePdfData.fileName} processed successfully`,
         })
       } catch (error) {
-        const errorPdfData: ClientPDFData = {
+        const errorPdfData: InvoicePDFData = {
           fileName: document.filename,
           clientNumber: '',
           installationNumber: '',

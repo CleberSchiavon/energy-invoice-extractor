@@ -1,6 +1,6 @@
 import pdfParser from 'pdf-parse'
 import fs from 'fs'
-import { ClientPDFData, LoggerTypes, LoggerReturn } from '@repo/types/api'
+import { InvoicePDFData, LoggerTypes, LoggerReturn } from '@repo/types/api'
 import { AppLogger, extractPdfData } from '~/utils/'
 import multer from 'multer'
 import { RequestHandler } from 'express'
@@ -18,7 +18,7 @@ export class TempStoragePdfService {
 export const parsePdfContent = async (
   pdfFilePath: string,
   pdfFileName: string,
-): Promise<ClientPDFData> => {
+): Promise<InvoicePDFData> => {
   try {
     const fileBuffer = fs.readFileSync(pdfFilePath)
     const parsedData = await pdfParser(fileBuffer)

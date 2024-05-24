@@ -6,13 +6,13 @@ import { LoggerReturn, LoggerTypes } from '@repo/types/api'
 import { AppLogger } from './utils'
 import validateEnv from './utils/validateEnv'
 import invoiceRouter from './routes/invoiceRouter'
-
+import { PrismaClient } from '@repo/database-tools'
 validateEnv()
 
 async function startServer() {
   const app: Express = express()
   const port = process.env.API_PORT || 3000
-
+  const prisma = new PrismaClient()
   app.use(bodyParser.json())
   app.use(
     bodyParser.urlencoded({
