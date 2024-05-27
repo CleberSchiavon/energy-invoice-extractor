@@ -1,6 +1,7 @@
-import { InvoiceDatabaseType, InvoicePDFData } from '@repo/types/api'
+import { InvoicePDFData } from '@repo/types/api'
+import { InvoiceFilterReturn } from '@repo/types/api/Database'
 
-export const filterInvoiceDataToDatabase = (invoices: InvoiceDatabaseType[]) => {
+export const filterInvoiceDataToDatabase = (invoices: InvoicePDFData[]): InvoiceFilterReturn[] => {
   return invoices.map(
     ({
       isCemigInvoice,

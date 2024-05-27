@@ -36,7 +36,7 @@ invoiceRouter.post(
           logReturn: LoggerReturn.ERROR,
           logMessage: `An error occurred when calling /new-invoice route: No file uploaded`,
         })
-        return response.status(400).json({ errorStatusCode: 400, errorMessage: 'No file uploaded' })
+        return response.status(400).json(ErrorHandling(400, 'No file uploaded'))
       }
       return await InvoiceModule.controller.processInvoiceFile(invoiceFiles, response)
     } catch (error) {

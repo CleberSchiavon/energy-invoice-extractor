@@ -2,16 +2,15 @@ import { PrismaClient } from '@repo/database-tools'
 import { LoggerReturn, LoggerTypes, InvoicePDFData, HttpStatusMessages } from '@repo/types/'
 import { AppLogger } from '~/utils'
 import { filterInvoiceDataToDatabase } from '~/utils/invoice/invoiceHandler'
-
+import ClientRepository from '~/modules/client/repository/client.repository'
 export default class InvoiceRepository {
-  static prismaClient: PrismaClient = new PrismaClient()
+  private static prismaClient: PrismaClient = new PrismaClient()
 
-  static async getById(clientNumber: string) {
-    const clientNumberFormatted = Number(clientNumber)
+  static async getById(clientNumber: number): Promise<any[]> {
     try {
       const invoices = await this.prismaClient.invoice.findMany({
         where: {
-          clientNumber: clientNumberFormatted,
+          clientNumber: clientNumber,
         },
       })
       return invoices
@@ -19,13 +18,13 @@ export default class InvoiceRepository {
       AppLogger({
         logReturn: LoggerReturn.ERROR,
         type: LoggerTypes.DATABASE_ERROR,
-        logMessage: `${HttpStatusMessages.ERROR_GETIING_ALL_INVOICES} ${error.errorMessage}`,
+        logMessage: `${HttpStatusMessages.ERROR_GETTING_INVOICE} ${error.message}`,
       })
-      return error
+      throw error
     }
   }
 
-  static async get() {
+  static async get(): Promise<any[]> {
     try {
       const allInvoices = await this.prismaClient.invoice.findMany()
       return allInvoices
@@ -33,41 +32,52 @@ export default class InvoiceRepository {
       AppLogger({
         logReturn: LoggerReturn.ERROR,
         type: LoggerTypes.DATABASE_ERROR,
-        logMessage: `${HttpStatusMessages.ERROR_GETIING_ALL_INVOICES} ${error.errorMessage}`,
+        logMessage: `${HttpStatusMessages.ERROR_GETIING_ALL_INVOICES} ${error.message}`,
       })
+      throw error
     }
   }
-  static async create(invoiceData: InvoicePDFData[]) {
+
+  static async create(invoiceData: InvoicePDFData[]): Promise<{
+    createdInvoices: any[]
+    notCreatedInvoices: any[]
+  }> {
     const newInvoiceData = filterInvoiceDataToDatabase(invoiceData)
-    const createdInvoices = []
-    const notCreatedInvoices = []
+    const createdInvoices: any[] = []
+    const notCreatedInvoices: any[] = []
 
     try {
-      for (const data of newInvoiceData) {
-        const existingInvoice = await this.prismaClient.invoice.findFirst({
+      for (const clientInvoice of newInvoiceData) {
+        const existingClient = await this.prismaClient.client.findFirst({
           where: {
-            clientNumber: data.clientNumber,
-            referenceMonth: data.referenceMonth,
+            clientNumber: clientInvoice.clientNumber,
           },
         })
 
-        if (!existingInvoice) {
-          await this.prismaClient.invoice.create({
-            data,
-          })
-          createdInvoices.push(data)
+        if (!existingClient) {
+          try {
+            await ClientRepository.create(clientInvoice)
+            createdInvoices.push(clientInvoice)
+          } catch (error) {
+            notCreatedInvoices.push(clientInvoice)
+          }
         } else {
-          notCreatedInvoices.push(data)
+          try {
+            await ClientRepository.update(existingClient, clientInvoice)
+            createdInvoices.push(clientInvoice)
+          } catch (error) {
+            notCreatedInvoices.push(clientInvoice)
+          }
         }
       }
       return { createdInvoices, notCreatedInvoices }
     } catch (error) {
       AppLogger({
-        type: LoggerTypes.INFO,
+        type: LoggerTypes.DATABASE_ERROR,
         logReturn: LoggerReturn.ERROR,
-        logMessage: `${HttpStatusMessages.ERROR_CREATING_INVOICES} ${error}`,
+        logMessage: `${HttpStatusMessages.ERROR_CREATING_INVOICES} ${error.message}`,
       })
-      throw error
+      return error
     }
   }
 }

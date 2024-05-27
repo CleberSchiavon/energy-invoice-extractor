@@ -7,8 +7,19 @@ datasource db {
   url      = env("API_DB_POSTGRE_URL")
 }
 
+model Client {
+  id                  Int       @id @default(autoincrement())
+  invoices            Invoice[]
+  clientNumber        Float
+  electricConsumption Float?
+  compensatedEnergy   Float?
+  totalValueWithoutGd Float?
+  gdEconomyValue      Float?
+}
+
 model Invoice {
   id                          Int     @id @default(autoincrement())
+  invoiceUniqueId             String  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   invoiceFileName             String
   installationNumber          String
   referenceMonth              String?
@@ -23,4 +34,6 @@ model Invoice {
   compensatedEnergyUnitPrice  Float?
   compensatedEnergyTotalPrice Float?
   publicLightingContribution  Float?
+  Client                      Client? @relation(fields: [clientId], references: [id])
+  clientId                    Int?
 }

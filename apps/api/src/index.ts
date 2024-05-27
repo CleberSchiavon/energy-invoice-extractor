@@ -7,6 +7,7 @@ import { AppLogger } from './utils'
 import validateEnv from './utils/validateEnv'
 import invoiceRouter from './routes/invoiceRouter'
 import { PrismaClient } from '@repo/database-tools'
+import clientRouter from './routes/clientRouter'
 validateEnv()
 
 export async function startServer() {
@@ -25,6 +26,7 @@ export async function startServer() {
   app.use(cors())
   app.use(express.json())
   app.use('/invoices', invoiceRouter)
+  app.use('/clients', clientRouter)
   app.get('/', (req: Request, res: Response) => {
     res.send('Express + TypeScript')
   })
