@@ -2,6 +2,7 @@
   "name": "energy-fare-extractor-main",
   "private": true,
   "version": "1.0.0",
+  "author": "Cleber Henrique",
   "scripts": {
     "prepare-repo": "bash ./scripts/prepare-repo.sh",
     "clean-repo": "bash ./scripts/clean.sh",

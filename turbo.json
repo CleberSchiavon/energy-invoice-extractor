@@ -1,43 +1,24 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDotEnv": [
-    ".env"
-  ],
+  "globalDotEnv": [".env"],
   "pipeline": {
     "dev": {
-      "dependsOn": [
-        "^db:generate"
-      ],
-      "dotEnv": [
-        ".env"
-      ],
+      "dependsOn": ["^db:generate"],
+      "dotEnv": [".env"],
       "cache": false,
       "persistent": true
     },
     "build": {
-      "dependsOn": [
-        "^build",
-        "^db:generate"
-      ],
-      "dotEnv": [
-        ".env"
-      ],
-      "outputs": [
-        "dist/**",
-        ".next/**",
-        "!.next/cache/**"
-      ]
+      "dependsOn": ["^build", "^db:generate"],
+      "dotEnv": [".env"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "lint": {
-      "dependsOn": [
-        "^lint"
-      ]
+      "dependsOn": ["^lint"]
     },
     "db:generate": {
       "cache": false,
-      "env": [
-        "API_DB_POSTGRE_URL"
-      ]
+      "env": ["API_DB_POSTGRE_URL"]
     },
     "db:push": {
       "cache": false

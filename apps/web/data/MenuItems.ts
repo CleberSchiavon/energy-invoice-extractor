@@ -1,4 +1,4 @@
-import { RiBillLine, RiHome3Line } from "react-icons/ri";
+import { RiBillLine, RiHome3Line } from 'react-icons/ri'
 
 export const MenuItems = [
   {
@@ -11,4 +11,4 @@ export const MenuItems = [
     route: '/invoices-history',
     icon: RiBillLine,
   },
-];
+]
