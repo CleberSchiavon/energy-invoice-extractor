@@ -2,7 +2,7 @@ export type DataValueTypes = 'string' | 'money' | 'kWh'
 
 interface IDisplayStatData {
   valueType: DataValueTypes
-  value: string
+  value: string | number
 }
 const moneyOptions = {
   style: 'currency',

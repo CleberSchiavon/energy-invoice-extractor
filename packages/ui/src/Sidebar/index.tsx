@@ -1,4 +1,3 @@
-'use client'
 import { ReactElement } from 'react'
 import MenuItem, { MenuItemType } from '../MenuItem'
 interface ISidebar {

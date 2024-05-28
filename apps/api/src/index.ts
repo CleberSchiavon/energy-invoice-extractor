@@ -6,7 +6,6 @@ import { LoggerReturn, LoggerTypes } from '@repo/types/api'
 import { AppLogger } from './utils'
 import validateEnv from './utils/validateEnv'
 import invoiceRouter from './routes/invoiceRouter'
-import { PrismaClient } from '@repo/database-tools'
 import clientRouter from './routes/clientRouter'
 validateEnv()
 
@@ -14,7 +13,6 @@ export async function startServer() {
   const app: Express = express()
   const port = process.env.API_PORT || 3000
   app.use(require('express-status-monitor')())
-  const prisma = new PrismaClient()
   app.use(bodyParser.json())
   app.use(
     bodyParser.urlencoded({
@@ -28,7 +26,7 @@ export async function startServer() {
   app.use('/invoices', invoiceRouter)
   app.use('/clients', clientRouter)
   app.get('/', (req: Request, res: Response) => {
-    res.send('Express + TypeScript')
+    res.send(400).json({ apiHealthy: true, apiMessage: 'API is Healthy' })
   })
 
   app.listen(port, () => {

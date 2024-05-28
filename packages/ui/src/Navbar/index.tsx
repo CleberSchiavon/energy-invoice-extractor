@@ -8,18 +8,18 @@ export type DropdownNavbarOptions = {
 }
 
 interface INavbar {
-  currentRouteTitle: string
+  navbarTitle: string
   optionsLogo: ReactElement
   dropdownOptions: DropdownNavbarOptions[]
 }
 
-const Navbar = ({ currentRouteTitle, optionsLogo, dropdownOptions }: INavbar) => {
+const Navbar = ({ navbarTitle, optionsLogo, dropdownOptions }: INavbar) => {
   const OptionsLogo = optionsLogo
   return (
     <div className="navbar bg-white rounded-2xl px-4">
       <div className="flex-1">
         <p className="text-md text-black">
-          {currentRouteTitle} | {defineHomeGreeting()} 👋🏼
+          {navbarTitle} | {defineHomeGreeting()} 👋🏼
         </p>
       </div>
       <div className="dropdown dropdown-bottom dropdown-end">

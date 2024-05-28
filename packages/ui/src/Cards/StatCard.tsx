@@ -1,13 +1,15 @@
 'use client'
 import React, { ReactElement } from 'react'
 import { DataValueTypes, setDisplayStatData } from '../utils/dataDisplay'
+import StatCardSkeleton from './StatCardSkeleton'
 interface ICard {
   title: string
-  subtitle?: string
+  subtitle?: string | number
   description?: string
   handleClick?: () => void
   statIcon?: ReactElement
   valueType?: DataValueTypes
+  loading?: boolean
 }
 
 const StatCard = ({
@@ -17,8 +19,13 @@ const StatCard = ({
   handleClick,
   statIcon,
   valueType = 'string',
+  loading,
 }: ICard) => {
   const StatIcon = statIcon
+
+  if (loading) {
+    return <StatCardSkeleton />
+  }
 
   return (
     <div

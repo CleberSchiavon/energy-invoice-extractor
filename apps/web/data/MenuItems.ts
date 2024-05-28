@@ -8,7 +8,7 @@ export const MenuItems = [
   },
   {
     title: 'Faturas',
-    route: '/invoices-history',
+    route: '/invoices',
     icon: RiBillLine,
   },
 ]

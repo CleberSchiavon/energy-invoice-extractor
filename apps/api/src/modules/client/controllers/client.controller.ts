@@ -5,12 +5,12 @@ import { AppLogger } from '~/utils'
 import ClientRepository from '../repository/client.repository'
 
 export default class ClientContoller {
-  static async listAllClients(response: Response) {
+  static async listAllClients() {
     try {
       const clients = await ClientRepository.listAll()
-      response.status(200).json(clients)
+      return clients
     } catch (error) {
-      ErrorHandling(500, HttpStatusMessages.GET_CLIENT_ERROR)
+      throw ErrorHandling(500, HttpStatusMessages.GET_CLIENT_ERROR)
     }
   }
   static async listClient(request: Request) {

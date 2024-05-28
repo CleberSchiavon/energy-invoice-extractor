@@ -5,7 +5,7 @@ const clientRouter: Router = express.Router()
 
 clientRouter.get('', async (request: Request, response: Response) => {
   try {
-    const clients = await ClientContoller.listAllClients(response)
+    const clients = await ClientContoller.listAllClients()
     return response.status(200).json(clients)
   } catch (error) {
     return response.status(400).json(error)
