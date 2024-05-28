@@ -3,8 +3,8 @@ import React from 'react'
 export type SelectOptions = {
   name: string
   value: string | number
-  disabled?: boolean // Make disabled property optional
-  selected?: boolean // Make selected property optional
+  disabled?: boolean
+  selected?: boolean
 }
 
 interface ISelect {

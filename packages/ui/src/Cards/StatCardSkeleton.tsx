@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const StatCardSkeleton = () => {
   return (
@@ -11,7 +11,7 @@ const StatCardSkeleton = () => {
       <div className="w-full h-5 bg-gray-300 rounded mt-3"></div>
       <div className="w-full h-5 bg-gray-300 rounded mt-2"></div>
     </div>
-  );
-};
+  )
+}
 
-export default StatCardSkeleton;
+export default StatCardSkeleton
