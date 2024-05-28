@@ -11,8 +11,8 @@ echo "Installing All Repo Dependencies"
 pnpm install
 echo "Repo Dependencies Installed"
 
-pnpm husky:install
+pnpm run husky:install
 echo "Generating Database"
-pnpm api:database-generate
+pnpm run api:database-generate
 echo "Database Generated"
 echo "Application is Ready to Start, type pnpm run dev to start the local application :)"
