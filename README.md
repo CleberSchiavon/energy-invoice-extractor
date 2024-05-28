@@ -28,6 +28,8 @@ pnpm run prepare-repo
 
 Pronto! Todo o enviroment está pronto e configurado
 
+OBS: Caso quiser acompanhar o desempenho da sua aplicação em tempo real, basta acessar a rota /status pelo navegador!
+
 ## Apps e Pacotes
 
 - `apps/api`: O backend da aplicação! Utiliza Express e Prisma/PostgreSQL
@@ -46,6 +48,7 @@ Esse repositório contém
 - TurboRepo
 - Node.JS
 - Express
+- Express Status Monitor
 - Next.JS
 - TailwindCSS
 - TypeScript
@@ -66,6 +69,7 @@ Esse repositório contém
 - 🤖 Conventional Commit Lint — Serve pra conferir se os commits estão sendo feitos usando Conventional Commit (https://www.conventionalcommits.org/en/v1.0.0/)
 - ⏰ Standard Version — Gera um changelog automatico a cada build, mostrando todas as mudanças que foram feitas
 - TurboRepo - Gestão inteligente de todo o repositório
+- Express Status Monitor - Caso você acessar a rota /status do seu navegador, você vai conseguir ver em tempo real todas as métricas de perfomance da aplicação
 
 ## Rotas da API
 
