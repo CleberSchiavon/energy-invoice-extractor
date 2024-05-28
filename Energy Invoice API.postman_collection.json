@@ -1,0 +1,217 @@
+{
+  "info": {
+    "_postman_id": "ae3091d2-903f-4adf-a10b-87d0358cb0da",
+    "name": "Energy Invoice API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Client",
+      "item": [
+        {
+          "name": "Get Client by CustomerNumber",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/3000055479-04-2023.pdf"
+                },
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/Teste Prático - Dev Full Stack - Lumi.pdf",
+                  "disabled": true
+                }
+              ],
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_dev}}/clients/7202788969",
+              "host": [
+                "{{base_url_dev}}"
+              ],
+              "path": [
+                "clients",
+                "7202788969"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get ALL Clients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_dev}}/clients",
+              "host": [
+                "{{base_url_dev}}"
+              ],
+              "path": [
+                "clients"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "Get Invoice by ClientNumber",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/3000055479-04-2023.pdf"
+                },
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/Teste Prático - Dev Full Stack - Lumi.pdf",
+                  "disabled": true
+                }
+              ],
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_dev}}/invoices/7202788969",
+              "host": [
+                "{{base_url_dev}}"
+              ],
+              "path": [
+                "invoices",
+                "7202788969"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Invoices",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/3004298116-06-2023.pdf"
+                },
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/3000055479-01-2023.pdf"
+                },
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/3000055479-04-2023.pdf",
+                  "disabled": true
+                },
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/3004298116-12-2023.pdf",
+                  "disabled": true
+                },
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/3004298116-07-2023.pdf",
+                  "disabled": true
+                }
+              ],
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_dev}}/invoices/new-invoice",
+              "host": [
+                "{{base_url_dev}}"
+              ],
+              "path": [
+                "invoices",
+                "new-invoice"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get ALL Invoices",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/3000055479-04-2023.pdf"
+                },
+                {
+                  "key": "pdfInvoice",
+                  "type": "file",
+                  "src": "/C:/Users/clebe/Downloads/Teste Prático - Dev Full Stack - Lumi.pdf",
+                  "disabled": true
+                }
+              ],
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_dev}}/invoices",
+              "host": [
+                "{{base_url_dev}}"
+              ],
+              "path": [
+                "invoices"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

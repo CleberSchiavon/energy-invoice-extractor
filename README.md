@@ -1,71 +1,165 @@
-# Turborepo starter
+# Energy Invoice Extractor
 
-## Install Project
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
+## Iniciar o projeto
+
+Iniciar o projeto e instalar suas dependencias é muito simples!
+
+Clone o .env.example e adicione as suas variaveis
+
+```sh
+API_PORT=3001 # Qual porta você vai rodar a API
+NEXT_PUBLIC_API_URL=http://localhost:3001 # URL da sua API (Essa variavel será utilizada pelo Front-End)
+API_DB_POSTGRE_URL=postgres://YourUserName:YourPassword@localhost:5432/NOME_DA_TABELA # Aqui é o Database URL, substitua os parametros para configurar o banco de dados
+```
 
 ```sh
 pnpm run prepare-repo
 ```
 
-### Apps and Packages
+Pronto! Todo o enviroment está pronto e configurado
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## Apps e Pacotes
 
-### Utilities
+- `apps/api`: O backend da aplicação! Utiliza Express e Prisma/PostgreSQL
+- `apps/web`: O frontend da aplicação! Utilizamos NextJS, TailwindCSS, Zustand e DaisyUI
+- `@repo/ui - packages/ui`: Aqui fica todos os componentes que são utilizados na aplicação
+- `@repo/database-tools - packages/database-tools`: Nesse pacote é onde a API utiliza do Prisma pra fazer as suas requests e reconhecer seus schemas
+- `@repo/types - packages/types`: Todas as Tipagens da aplicação ficam aqui, elas são compartilhadas com todo o Monorepo
+- `@repo/eslint-config - packages/eslint-config`: Configurações do ESLINT (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@repo/typescript-config - packages/typescript-config`: Todos os TSConfigs utilizados na aplicação ficam aqui
+- `@repo/tailwind-config - packages/tailwind-config`: Todas as configurações do Tailwind que o Frontend usa fica aqui! Assim como o globals.css
 
-This Turborepo has some additional tools already setup for you:
+## Features
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+Esse repositório contém
 
-### Build
+- TurboRepo
+- Node.JS
+- Express
+- Next.JS
+- TailwindCSS
+- TypeScript
+- PNPM
+- DotEnv
+- Jest and Supertest
+- Prettier and Eslint
+- Husky with Conventional Commits
+- Standard Version
+- Editor Config
 
-To build all apps and packages, run the following command:
+## Dev Features
 
+- 📈 Absolute Import and Path Alias — Uma alternativa do typescript pra importar arquivos sem precisar de "../../", ao invés disso usamos "@/(pasta)"
+- 📏 ESLint — O ESLint serve pra procurar problemas de escrita dentro do código (pode ser personalizado conforme as vontades do usuário)
+- 💖 Prettier and Eslint — Formata o código automaticamente com os padrões definidos do usuário
+- 🐶 Husky, Lint Staged — Serve pra rodar uma série de scripts nos arquivos prestes a commitar ou a subir
+- 🤖 Conventional Commit Lint — Serve pra conferir se os commits estão sendo feitos usando Conventional Commit (https://www.conventionalcommits.org/en/v1.0.0/)
+- ⏰ Standard Version — Gera um changelog automatico a cada build, mostrando todas as mudanças que foram feitas
+- TurboRepo - Gestão inteligente de todo o repositório
+
+## Rotas da API
+
+Um arquivo Postman Collection também foi compartilhado na raiz do projeto!
+
+### Faturas
+
+#### GET /invoices
+
+- Recupera todas as faturas
+- Resposta: 200 OK com todas as faturas
+
+#### GET /invoices/:clientNumber
+
+- Recupera as faturas por número do cliente
+- Resposta: 200 OK com as faturas do cliente especificado
+
+#### POST /invoices/new-invoice
+
+- Cria uma nova fatura
+- Requer o envio de um arquivo
+- Resposta: 200 OK com mensagem de sucesso ou mensagem de erro
+
+### Clientes
+
+#### GET /clients
+
+- Recupera todos os clientes
+- Resposta: 200 OK com todos os clientes
+
+#### GET /clients/:clientNumber
+
+- Recupera um cliente específico pelo número do cliente
+- Resposta: 200 OK com o cliente especificado
+
+## Comandos Uteis
+
+Esse repositório contém vários comandos uteis na Raiz do projeto, para acelerar todo o processo de desenvolvimento
+
+### Comandos do Frontend
+
+```sh
+pnpm run frontend:dev # Rodar APENAS o front em modo de desenvolvimento
 ```
-cd my-turborepo
-pnpm build
+
+### Comandos da API
+
+```sh
+pnpm run api:dev # Rodar APENAS a API em modo de desenvolvimento
 ```
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
+```sh
+pnpm run api:test # Rodar todos os testes da API
 ```
 
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```sh
+pnpm run api:database-generate # Rodar todos os schemas do prisma e gerar um Banco de Dados novo
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Comandos do Repositório
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
+```sh
+pnpm run dev # Rodar o Front-End o backend de forma simultânea, cada um em uma porta
 ```
 
-## Useful Links
+```sh
+pnpm run clean-repo # Apaga todos os Caches e Dependências do projeto
+```
 
-Learn more about the power of Turborepo:
+```sh
+pnpm run husky:install # Instala o husky e cria os arquivos na raiz do projeto
+```
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+```sh
+pnpm run format # Roda o prettier em todo o projeto
+```
+
+```sh
+pnpm run lint # Roda o ESLint e o prettier em todo o projeto
+```
+
+```sh
+pnpm run changelog # Gera um arquivo de CHANGELOG baseado na arvore de commits
+```
+
+## Autor
+
+ <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 15px">
+ <a href="https://www.linkedin.com/in/cleberschiavon">
+ <b>Cleber Henrique</b>
+</a>
+ <a href="mailto:cleberschiavon@outlook.com">
+cleberschiavon@outlook.com
+</a>
+ </div>
+
+[![Linkedin Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cleberschiavon)
