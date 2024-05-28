@@ -1,7 +1,7 @@
 {
   "name": "energy-invoice-extractor-main",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Cleber Henrique",
   "scripts": {
     "prepare-repo": "bash ./scripts/prepare-repo.sh",
